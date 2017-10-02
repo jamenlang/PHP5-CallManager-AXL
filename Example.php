@@ -10,7 +10,8 @@ $URL    = "https://$ip:8443/axl"; // Prod CUCM
 
 $SCHEMA = "./schema/10.5/AXLAPI.wsdl";
 
-//RIS is used for realtime registration status among other things.
+//RIS is used for realtime registration status among other things. RISPOST.wsdl can be downloaded with an authenticated session from
+//https://$ip:8443/realtimeservice2/services/RISService70?wsdl
 $RISURL = "https://$ip:8443/realtimeservice2/services/RISService70";
 $RISSCHEMA = "./schema/10.5/RISPOST.wsdl";
 
