@@ -191,6 +191,23 @@ class Callmanager
         }
     }
 
+    // return results for a query
+    
+    public function run_sql_query($QUERY)
+    {
+        $BASETIME = $this->microtimeTicks();
+        $RETURN = $this->SOAPCLIENT->executeSQLQuery(['sql' => $QUERY]);
+        $DIFFTIME = $this->microtimeTicks() - $BASETIME;
+        // log our soap call
+        $this->log_soap_call('executeSQLQuery', $DIFFTIME, ['sql' => $QUERY], $RETURN);
+
+        if (!is_object($RETURN)) {
+            throw new \Exception('SOAP reply is not an object');
+        } else {
+            return $RETURN;
+        }
+    }
+    
     // Get a complete list of the names of all phones
 
     public function get_phone_names()
