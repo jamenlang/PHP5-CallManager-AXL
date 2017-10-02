@@ -191,6 +191,35 @@ class Callmanager
         }
     }
 
+    //get phone registrations from the specified type.
+    
+    
+    public function get_registration_by_type($TYPE = 'Any')
+    {
+        $BASETIME = $this->microtimeTicks();
+
+        $RETURN = $this->SOAPCLIENT->SelectCmDevice(
+                array(
+                        "StateInfo"=>"",
+                        "CmSelectionCriteria"=>array(
+                                "Status"=>$TYPE,
+                                "SelectBy"=>"Name",
+                                "SelectItems"=>""
+                        )
+                )
+        );
+
+        $DIFFTIME = $this->microtimeTicks() - $BASETIME;
+
+        $this->log_soap_call('SelectCmDevice', $DIFFTIME, $TYPE, $RETURN);
+
+        if (!is_object($RETURN)) {
+            throw new \Exception('SOAP reply is not an object');
+        } else {
+            return $RETURN;
+        }
+    }
+    
     // return results for a query
     
     public function run_sql_query($QUERY)
